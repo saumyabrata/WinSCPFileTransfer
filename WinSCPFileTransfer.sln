@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinSCPFileTransfer", "WinSCPFileTransfer.csproj", "{53306C62-D82A-4427-8F69-A9A57378EC2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53306C62-D82A-4427-8F69-A9A57378EC2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53306C62-D82A-4427-8F69-A9A57378EC2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53306C62-D82A-4427-8F69-A9A57378EC2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53306C62-D82A-4427-8F69-A9A57378EC2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {886445EE-C227-49D9-B8CE-C6B0F20A8C31}
+	EndGlobalSection
+EndGlobal
