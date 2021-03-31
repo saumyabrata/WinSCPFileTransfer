@@ -28,13 +28,12 @@ namespace WinSCPFileTransfer
 
         private void btnSelectMultiple_Click(object sender, EventArgs e)
         {
-            string message = "";
             openFileDialog1.Multiselect = true;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 foreach (string file in openFileDialog1.FileNames)
                 {
-                    string[] row1 = new string[] { "true",Path.GetFileName(file), file };
+                    string[] row1 = new string[] { "true",Path.GetFileName(file), file, file };
                     dgvFiles.Rows.Add(row1);
                 }
             }
@@ -144,5 +143,9 @@ namespace WinSCPFileTransfer
 
         }
 
+        private void BtnTransfer_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
