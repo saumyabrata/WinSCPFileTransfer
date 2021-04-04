@@ -18,6 +18,7 @@ namespace WinSCPFileTransfer
         int locationid;
         int categoryid;
         int rowid;
+        bool statusOK = false;
 
         public FormServerMgmt()
         {
@@ -100,6 +101,11 @@ namespace WinSCPFileTransfer
                 MessageBox.Show("Select Category !!!");
                 comboCategory.Select();
             }
+            else if (string.IsNullOrWhiteSpace(textPassword.Text) && string.IsNullOrWhiteSpace(textUser.Text))
+            {
+                MessageBox.Show("Username and Password both need to be entered !!!");
+                textUser.Select();
+            }
             else
             {
                 string conn = ConfigurationManager.ConnectionStrings["patchmanagementdb"].ConnectionString;
@@ -107,12 +113,21 @@ namespace WinSCPFileTransfer
                 {
                     try
                     {
+                        string username = "";
+                        string encrypted_string = "";
+                        if (!string.IsNullOrWhiteSpace(textPassword.Text) && !string.IsNullOrWhiteSpace(textUser.Text))
+                        {
+                            username = textUser.Text.ToString().Trim();
+                            encrypted_string = EncryptionandDecryption.Encrypt(textPassword.Text, "Qnx4pr#2021");
+                        }
                         connection.Open();
                         SqlCommand sqlCmd = new SqlCommand("sp_targetserver", connection);
                         sqlCmd.CommandType = CommandType.StoredProcedure;
                         sqlCmd.Parameters.AddWithValue("@ActionType", "SaveData");
                         sqlCmd.Parameters.AddWithValue("@servername", textServerName.Text.Trim().ToString());
                         sqlCmd.Parameters.AddWithValue("@ipaddress", textIP.Text.Trim().ToString());
+                        sqlCmd.Parameters.AddWithValue("@username", username);
+                        sqlCmd.Parameters.AddWithValue("@password", encrypted_string);
                         sqlCmd.Parameters.AddWithValue("@location_id", locationid);
                         sqlCmd.Parameters.AddWithValue("@category_id", categoryid);
                         sqlCmd.Parameters.AddWithValue("@lastupdatedversion", Convert.ToDecimal(textVersion.Text.Trim().ToString()));
@@ -148,6 +163,8 @@ namespace WinSCPFileTransfer
             btnSave.Text = "Save";
             textServerName.Text = "";
             textIP.Text = "";
+            textUser.Text = "";
+            textPassword.Text = "";
             textVersion.Text = "";
             comboLocation.SelectedIndex = -1;
             comboCategory.SelectedIndex = -1;
@@ -163,11 +180,21 @@ namespace WinSCPFileTransfer
                 if (dtData.Rows.Count > 0)
                 {
                     //rowid = Convert.ToInt32(dtData.Rows[0][0].ToString());
-                    textServerName.Text = dtData.Rows[0][1].ToString();
-                    textIP.Text = dtData.Rows[0][2].ToString();
-                    comboLocation.SelectedValue = Convert.ToInt32(dtData.Rows[0][3].ToString());
-                    comboCategory.SelectedValue = Convert.ToInt32(dtData.Rows[0][4].ToString());
-                    textVersion.Text = dtData.Rows[0][5].ToString();
+                    textServerName.Text = dtData.Rows[0][0].ToString();
+                    textIP.Text = dtData.Rows[0][1].ToString();
+                    textUser.Text = dtData.Rows[0][2].ToString();
+                    if (!string.IsNullOrWhiteSpace(dtData.Rows[0][3].ToString()))
+                        {
+                        string decryptedstring = EncryptionandDecryption.Decrypt(dtData.Rows[0][3].ToString(), "Qnx4pr#2021");
+                        textPassword.Text = decryptedstring;
+                        }
+                    else
+                    {
+                        textPassword.Text = "";
+                    }
+                    comboLocation.SelectedValue = Convert.ToInt32(dtData.Rows[0][4].ToString());
+                    comboCategory.SelectedValue = Convert.ToInt32(dtData.Rows[0][5].ToString());
+                    textVersion.Text = dtData.Rows[0][6].ToString();
                 }
                 else
                 {
@@ -261,6 +288,16 @@ namespace WinSCPFileTransfer
         {
             categoryid = Convert.ToInt32(comboCategory.SelectedValue.ToString());
             string category = comboCategory.Text.ToString();
+
+        }
+
+        private void panelServer_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

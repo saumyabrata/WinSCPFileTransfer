@@ -69,9 +69,6 @@
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>packages\NLog.4.7.9\lib\net45\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="RoboSharp, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\RoboSharp.1.2.2\lib\net45\RoboSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -124,6 +121,7 @@
     <Compile Include="FormServerMgmt.Designer.cs">
       <DependentUpon>FormServerMgmt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Global\EncryptionandDecryption.cs" />
     <Compile Include="Global\Dbconnection.cs" />
     <Compile Include="Global\SqlErrorNumbers.cs" />
     <Compile Include="MainMenu.cs">

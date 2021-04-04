@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml;
 using System.Windows.Forms;
 using WinSCPFileTransfer.Global;
+using WinSCP;
 
 namespace WinSCPFileTransfer
 {
@@ -17,7 +13,8 @@ namespace WinSCPFileTransfer
         string categorylist = "";
         string locationlist = "";
         string poslist = "";
-
+        const string KnownHostsFile = "KnownHosts.xml";
+        const int SshPortNumber = 22;
         public FormPatchApply()
         {
             InitializeComponent();
@@ -145,6 +142,158 @@ namespace WinSCPFileTransfer
 
         private void BtnTransfer_Click(object sender, EventArgs e)
         {
+            foreach (var item in ListPOS.CheckedItems)
+            {
+                var listrow = (item as DataRowView).Row;
+                foreach (DataGridViewRow row in dgvFiles.Rows)
+                {
+                    if (Convert.ToBoolean(row.Cells[0].Value))
+                    {
+                        Main_Process(listrow["ipaddress"].ToString().Trim(), row.Cells[2].Value.ToString(), row.Cells[3].Value.ToString().Replace(@"\", "/"));
+                    }
+                }
+            }
+        }
+
+        public static int Main_Process(string mhostname,string sourcepath,string targetpath)
+        {
+            try
+            {
+                // Setup session options
+                SessionOptions sessionOptions = new SessionOptions
+                {
+                    Protocol = Protocol.Scp,
+                    HostName = mhostname,
+                    UserName = "Administrator",
+                    Password = "^(A59g-!@=fj^",
+                    //SshHostKeyFingerprint = "ssh-ed25519 255 1HdaY6/8lIXSZc1pk5g5cyS6/tf6pC8PgVdtjeHsnZI=",
+                    //GiveUpSecurityAndAcceptAnySshHostKey = true
+                    };
+                sessionOptions.AddRawSettings("FSProtocol", "2");
+
+                // Cache key is hostname:portnumber
+                int portNumber =
+                    (sessionOptions.PortNumber != 0) ? sessionOptions.PortNumber : SshPortNumber;
+                string sessionKey = string.Format("{0}:{1}", sessionOptions.HostName, portNumber);
+
+                // Load known hosts (if any)
+                XmlDocument knownHosts = new XmlDocument();
+                if (File.Exists(KnownHostsFile))
+                {
+                    knownHosts.Load(KnownHostsFile);
+                }
+                else
+                {
+                    knownHosts.AppendChild(knownHosts.CreateElement("KnownHosts"));
+                }
+
+                // Lookup host key for this session 
+                XmlNode fingerprintNode =
+                    knownHosts.DocumentElement.SelectSingleNode(
+                        "KnownHost[@host='" + sessionKey + "']/@fingerprint");
+
+                string fingerprint = null;
+                if (fingerprintNode != null)
+                {
+                    fingerprint = fingerprintNode.Value;
+                    Console.WriteLine("Connecting to a known host");
+                }
+                else
+                {
+                    // Host is not known yet. Scan its host key and let the user decide.
+                    using (Session session = new Session())
+                    {
+                        fingerprint = session.ScanFingerprint(sessionOptions, "SHA-256");
+                    }
+
+                    //Console.Write(
+                    //    "Continue connecting to an unknown server and add its host key to a cache?" +
+                    //        Environment.NewLine +
+                    //    "The server's host key was not found in the cache." + Environment.NewLine +
+                    //    "You have no guarantee that the server is the computer you think it is." +
+                    //        Environment.NewLine +
+                    //    Environment.NewLine +
+                    //    "The server's key fingerprint is:" + Environment.NewLine +
+                    //    fingerprint + Environment.NewLine +
+                    //    Environment.NewLine +
+                    //    "If you trust this host, press Y. To abandon the connection, press N. ");
+
+                    //char key;
+                    //do
+                    //{
+                    //    key = char.ToUpperInvariant(Console.ReadKey(true).KeyChar);
+                    //    if (key == 'N')
+                    //    {
+                    //        Console.WriteLine(key);
+                    //        return 2;
+                    //    }
+                    //}
+                    //while (key != 'Y');
+
+                    //Console.WriteLine(key);
+
+                    // Cache the host key
+                    XmlElement knownHost = knownHosts.CreateElement("KnownHost");
+                    knownHosts.DocumentElement.AppendChild(knownHost);
+                    knownHost.SetAttribute("host", sessionKey);
+                    knownHost.SetAttribute("fingerprint", fingerprint);
+
+                    knownHosts.Save(KnownHostsFile);
+                }
+
+                // Now we have the fingerprint
+                sessionOptions.SshHostKeyFingerprint = fingerprint;
+
+
+                using (Session session = new Session())
+                    {
+                        // Connect
+                        session.Open(sessionOptions);
+
+                        // Upload files
+                        TransferOptions transferOptions = new TransferOptions();
+                        transferOptions.TransferMode = TransferMode.Binary;
+                    transferOptions.ResumeSupport.State = WinSCP.TransferResumeSupportState.On;
+
+                        TransferOperationResult transferResult;
+                        transferResult =
+                            session.PutFiles(sourcepath, targetpath, false, transferOptions);
+
+                        // Throw on any error
+                        transferResult.Check();
+
+                        // Print results
+                        foreach (TransferEventArgs transfer in transferResult.Transfers)
+                        {
+                            MessageBox.Show("Upload of "+ transfer.FileName +" succeeded");
+                        }
+                    }
+
+                    return 0;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return 1;
+            }
+        }
+
+        private void checkPOS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkPOS.Checked == true)
+            {
+                for (int i = 0; i < ListPOS.Items.Count; i++)
+                {
+                    ListPOS.SetItemChecked(i, true);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < ListPOS.Items.Count; i++)
+                {
+                    ListPOS.SetItemChecked(i, false);
+                }
+            }
 
         }
     }

@@ -35,6 +35,10 @@ namespace WinSCPFileTransfer
             this.btnSelectMultiple = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dgvFiles = new System.Windows.Forms.DataGridView();
+            this.Check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colFilename = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DestPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtnTransfer = new System.Windows.Forms.Button();
             this.ListLocation = new System.Windows.Forms.CheckedListBox();
             this.checkLocation = new System.Windows.Forms.CheckBox();
@@ -43,10 +47,6 @@ namespace WinSCPFileTransfer
             this.ListPOS = new System.Windows.Forms.CheckedListBox();
             this.checkPOS = new System.Windows.Forms.CheckBox();
             this.BttnPOSList = new System.Windows.Forms.Button();
-            this.Check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colFilename = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DestPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFiles)).BeginInit();
             this.SuspendLayout();
@@ -78,7 +78,7 @@ namespace WinSCPFileTransfer
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label2.Location = new System.Drawing.Point(273, 29);
+            this.label2.Location = new System.Drawing.Point(273, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 20);
             this.label2.TabIndex = 3;
@@ -117,102 +117,6 @@ namespace WinSCPFileTransfer
             this.dgvFiles.Size = new System.Drawing.Size(790, 343);
             this.dgvFiles.TabIndex = 7;
             // 
-            // BtnTransfer
-            // 
-            this.BtnTransfer.Location = new System.Drawing.Point(684, 675);
-            this.BtnTransfer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BtnTransfer.Name = "BtnTransfer";
-            this.BtnTransfer.Size = new System.Drawing.Size(116, 33);
-            this.BtnTransfer.TabIndex = 8;
-            this.BtnTransfer.Text = "Transfer";
-            this.BtnTransfer.UseVisualStyleBackColor = true;
-            this.BtnTransfer.Click += new System.EventHandler(this.BtnTransfer_Click);
-            // 
-            // ListLocation
-            // 
-            this.ListLocation.BackColor = System.Drawing.Color.Gainsboro;
-            this.ListLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ListLocation.FormattingEnabled = true;
-            this.ListLocation.Location = new System.Drawing.Point(19, 65);
-            this.ListLocation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.ListLocation.Name = "ListLocation";
-            this.ListLocation.Size = new System.Drawing.Size(251, 193);
-            this.ListLocation.TabIndex = 9;
-            // 
-            // checkLocation
-            // 
-            this.checkLocation.AutoSize = true;
-            this.checkLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkLocation.ForeColor = System.Drawing.Color.Gainsboro;
-            this.checkLocation.Location = new System.Drawing.Point(109, 25);
-            this.checkLocation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.checkLocation.Name = "checkLocation";
-            this.checkLocation.Size = new System.Drawing.Size(102, 24);
-            this.checkLocation.TabIndex = 10;
-            this.checkLocation.Text = "Select All";
-            this.checkLocation.UseVisualStyleBackColor = true;
-            this.checkLocation.CheckedChanged += new System.EventHandler(this.checkLocation_CheckedChanged);
-            // 
-            // checkCategory
-            // 
-            this.checkCategory.AutoSize = true;
-            this.checkCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkCategory.ForeColor = System.Drawing.Color.Gainsboro;
-            this.checkCategory.Location = new System.Drawing.Point(370, 29);
-            this.checkCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.checkCategory.Name = "checkCategory";
-            this.checkCategory.Size = new System.Drawing.Size(102, 24);
-            this.checkCategory.TabIndex = 11;
-            this.checkCategory.Text = "Select All";
-            this.checkCategory.UseVisualStyleBackColor = true;
-            this.checkCategory.CheckedChanged += new System.EventHandler(this.checkCategory_CheckedChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label4.Location = new System.Drawing.Point(525, 33);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 20);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Target POS";
-            // 
-            // ListPOS
-            // 
-            this.ListPOS.BackColor = System.Drawing.SystemColors.Info;
-            this.ListPOS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ListPOS.FormattingEnabled = true;
-            this.ListPOS.Location = new System.Drawing.Point(525, 65);
-            this.ListPOS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.ListPOS.Name = "ListPOS";
-            this.ListPOS.Size = new System.Drawing.Size(284, 193);
-            this.ListPOS.TabIndex = 13;
-            // 
-            // checkPOS
-            // 
-            this.checkPOS.AutoSize = true;
-            this.checkPOS.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkPOS.ForeColor = System.Drawing.Color.Gainsboro;
-            this.checkPOS.Location = new System.Drawing.Point(707, 33);
-            this.checkPOS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.checkPOS.Name = "checkPOS";
-            this.checkPOS.Size = new System.Drawing.Size(102, 24);
-            this.checkPOS.TabIndex = 14;
-            this.checkPOS.Text = "Select All";
-            this.checkPOS.UseVisualStyleBackColor = true;
-            // 
-            // BttnPOSList
-            // 
-            this.BttnPOSList.Location = new System.Drawing.Point(580, 264);
-            this.BttnPOSList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BttnPOSList.Name = "BttnPOSList";
-            this.BttnPOSList.Size = new System.Drawing.Size(169, 33);
-            this.BttnPOSList.TabIndex = 15;
-            this.BttnPOSList.Text = "Populate POS List";
-            this.BttnPOSList.UseVisualStyleBackColor = true;
-            this.BttnPOSList.Click += new System.EventHandler(this.BttnPOSList_Click);
-            // 
             // Check
             // 
             this.Check.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -241,6 +145,103 @@ namespace WinSCPFileTransfer
             this.DestPath.MinimumWidth = 6;
             this.DestPath.Name = "DestPath";
             this.DestPath.Width = 300;
+            // 
+            // BtnTransfer
+            // 
+            this.BtnTransfer.Location = new System.Drawing.Point(684, 675);
+            this.BtnTransfer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BtnTransfer.Name = "BtnTransfer";
+            this.BtnTransfer.Size = new System.Drawing.Size(116, 33);
+            this.BtnTransfer.TabIndex = 8;
+            this.BtnTransfer.Text = "Transfer";
+            this.BtnTransfer.UseVisualStyleBackColor = true;
+            this.BtnTransfer.Click += new System.EventHandler(this.BtnTransfer_Click);
+            // 
+            // ListLocation
+            // 
+            this.ListLocation.BackColor = System.Drawing.Color.Gainsboro;
+            this.ListLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListLocation.FormattingEnabled = true;
+            this.ListLocation.Location = new System.Drawing.Point(19, 65);
+            this.ListLocation.Margin = new System.Windows.Forms.Padding(4);
+            this.ListLocation.Name = "ListLocation";
+            this.ListLocation.Size = new System.Drawing.Size(251, 193);
+            this.ListLocation.TabIndex = 9;
+            // 
+            // checkLocation
+            // 
+            this.checkLocation.AutoSize = true;
+            this.checkLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkLocation.ForeColor = System.Drawing.Color.Gainsboro;
+            this.checkLocation.Location = new System.Drawing.Point(109, 25);
+            this.checkLocation.Margin = new System.Windows.Forms.Padding(4);
+            this.checkLocation.Name = "checkLocation";
+            this.checkLocation.Size = new System.Drawing.Size(102, 24);
+            this.checkLocation.TabIndex = 10;
+            this.checkLocation.Text = "Select All";
+            this.checkLocation.UseVisualStyleBackColor = true;
+            this.checkLocation.CheckedChanged += new System.EventHandler(this.checkLocation_CheckedChanged);
+            // 
+            // checkCategory
+            // 
+            this.checkCategory.AutoSize = true;
+            this.checkCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkCategory.ForeColor = System.Drawing.Color.Gainsboro;
+            this.checkCategory.Location = new System.Drawing.Point(370, 25);
+            this.checkCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.checkCategory.Name = "checkCategory";
+            this.checkCategory.Size = new System.Drawing.Size(102, 24);
+            this.checkCategory.TabIndex = 11;
+            this.checkCategory.Text = "Select All";
+            this.checkCategory.UseVisualStyleBackColor = true;
+            this.checkCategory.CheckedChanged += new System.EventHandler(this.checkCategory_CheckedChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label4.Location = new System.Drawing.Point(525, 25);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 20);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Target POS";
+            // 
+            // ListPOS
+            // 
+            this.ListPOS.BackColor = System.Drawing.SystemColors.Info;
+            this.ListPOS.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListPOS.FormattingEnabled = true;
+            this.ListPOS.Location = new System.Drawing.Point(525, 65);
+            this.ListPOS.Margin = new System.Windows.Forms.Padding(4);
+            this.ListPOS.Name = "ListPOS";
+            this.ListPOS.Size = new System.Drawing.Size(284, 193);
+            this.ListPOS.TabIndex = 13;
+            // 
+            // checkPOS
+            // 
+            this.checkPOS.AutoSize = true;
+            this.checkPOS.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkPOS.ForeColor = System.Drawing.Color.Gainsboro;
+            this.checkPOS.Location = new System.Drawing.Point(707, 25);
+            this.checkPOS.Margin = new System.Windows.Forms.Padding(4);
+            this.checkPOS.Name = "checkPOS";
+            this.checkPOS.Size = new System.Drawing.Size(102, 24);
+            this.checkPOS.TabIndex = 14;
+            this.checkPOS.Text = "Select All";
+            this.checkPOS.UseVisualStyleBackColor = true;
+            this.checkPOS.CheckedChanged += new System.EventHandler(this.checkPOS_CheckedChanged);
+            // 
+            // BttnPOSList
+            // 
+            this.BttnPOSList.Location = new System.Drawing.Point(580, 264);
+            this.BttnPOSList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BttnPOSList.Name = "BttnPOSList";
+            this.BttnPOSList.Size = new System.Drawing.Size(169, 33);
+            this.BttnPOSList.TabIndex = 15;
+            this.BttnPOSList.Text = "Populate POS List";
+            this.BttnPOSList.UseVisualStyleBackColor = true;
+            this.BttnPOSList.Click += new System.EventHandler(this.BttnPOSList_Click);
             // 
             // progressBar1
             // 
