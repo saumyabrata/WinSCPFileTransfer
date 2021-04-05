@@ -300,5 +300,10 @@ namespace WinSCPFileTransfer
         {
 
         }
+
+        private void textBoxFilter_TextChanged(object sender, EventArgs e)
+        {
+            (dgvSrv.DataSource as DataTable).DefaultView.RowFilter =  string.Format("servername LIKE '{0}%' OR servername LIKE '% {0}%'", textBoxFilter.Text);
+        }
     }
 }

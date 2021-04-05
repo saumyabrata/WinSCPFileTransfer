@@ -31,10 +31,14 @@ namespace WinSCPFileTransfer
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelServer = new System.Windows.Forms.Panel();
+            this.checkFingerprint = new System.Windows.Forms.CheckBox();
+            this.checkSSH = new System.Windows.Forms.CheckBox();
+            this.checkConnectivity = new System.Windows.Forms.CheckBox();
+            this.textPassword = new System.Windows.Forms.TextBox();
+            this.textUser = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnCheck = new FontAwesome.Sharp.IconButton();
             this.label6 = new System.Windows.Forms.Label();
-            this.textVersion = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.comboCategory = new System.Windows.Forms.ComboBox();
             this.comboLocation = new System.Windows.Forms.ComboBox();
             this.textIP = new System.Windows.Forms.TextBox();
@@ -49,12 +53,15 @@ namespace WinSCPFileTransfer
             this.btnSave = new FontAwesome.Sharp.IconButton();
             this.panelGrid = new System.Windows.Forms.Panel();
             this.dgvSrv = new System.Windows.Forms.DataGridView();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textUser = new System.Windows.Forms.TextBox();
-            this.textPassword = new System.Windows.Forms.TextBox();
-            this.checkConnectivity = new System.Windows.Forms.CheckBox();
-            this.checkSSH = new System.Windows.Forms.CheckBox();
-            this.checkFingerprint = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.textBoxFilter = new System.Windows.Forms.TextBox();
+            this.comboFilter = new System.Windows.Forms.ComboBox();
             this.panelServer.SuspendLayout();
             this.panelButton.SuspendLayout();
             this.panelGrid.SuspendLayout();
@@ -64,6 +71,13 @@ namespace WinSCPFileTransfer
             // panelServer
             // 
             this.panelServer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(25)))), ((int)(((byte)(72)))));
+            this.panelServer.Controls.Add(this.comboFilter);
+            this.panelServer.Controls.Add(this.textBoxFilter);
+            this.panelServer.Controls.Add(this.label5);
+            this.panelServer.Controls.Add(this.textBox2);
+            this.panelServer.Controls.Add(this.textBox1);
+            this.panelServer.Controls.Add(this.label9);
+            this.panelServer.Controls.Add(this.label8);
             this.panelServer.Controls.Add(this.checkFingerprint);
             this.panelServer.Controls.Add(this.checkSSH);
             this.panelServer.Controls.Add(this.checkConnectivity);
@@ -72,8 +86,6 @@ namespace WinSCPFileTransfer
             this.panelServer.Controls.Add(this.label7);
             this.panelServer.Controls.Add(this.btnCheck);
             this.panelServer.Controls.Add(this.label6);
-            this.panelServer.Controls.Add(this.textVersion);
-            this.panelServer.Controls.Add(this.label5);
             this.panelServer.Controls.Add(this.comboCategory);
             this.panelServer.Controls.Add(this.comboLocation);
             this.panelServer.Controls.Add(this.textIP);
@@ -84,11 +96,81 @@ namespace WinSCPFileTransfer
             this.panelServer.Controls.Add(this.label1);
             this.panelServer.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelServer.Location = new System.Drawing.Point(0, 0);
-            this.panelServer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelServer.Margin = new System.Windows.Forms.Padding(4);
             this.panelServer.Name = "panelServer";
-            this.panelServer.Size = new System.Drawing.Size(888, 239);
+            this.panelServer.Size = new System.Drawing.Size(905, 307);
             this.panelServer.TabIndex = 83;
             this.panelServer.Paint += new System.Windows.Forms.PaintEventHandler(this.panelServer_Paint);
+            // 
+            // checkFingerprint
+            // 
+            this.checkFingerprint.AutoSize = true;
+            this.checkFingerprint.ForeColor = System.Drawing.Color.Gainsboro;
+            this.checkFingerprint.Location = new System.Drawing.Point(537, 231);
+            this.checkFingerprint.Name = "checkFingerprint";
+            this.checkFingerprint.Size = new System.Drawing.Size(194, 22);
+            this.checkFingerprint.TabIndex = 97;
+            this.checkFingerprint.Text = "Generate SHA Fingerprint";
+            this.checkFingerprint.UseVisualStyleBackColor = true;
+            // 
+            // checkSSH
+            // 
+            this.checkSSH.AutoSize = true;
+            this.checkSSH.ForeColor = System.Drawing.Color.Gainsboro;
+            this.checkSSH.Location = new System.Drawing.Point(406, 231);
+            this.checkSSH.Name = "checkSSH";
+            this.checkSSH.Size = new System.Drawing.Size(102, 22);
+            this.checkSSH.TabIndex = 96;
+            this.checkSSH.Text = "SSH Status";
+            this.checkSSH.UseVisualStyleBackColor = true;
+            // 
+            // checkConnectivity
+            // 
+            this.checkConnectivity.AutoSize = true;
+            this.checkConnectivity.ForeColor = System.Drawing.Color.Gainsboro;
+            this.checkConnectivity.Location = new System.Drawing.Point(271, 232);
+            this.checkConnectivity.Name = "checkConnectivity";
+            this.checkConnectivity.Size = new System.Drawing.Size(108, 22);
+            this.checkConnectivity.TabIndex = 95;
+            this.checkConnectivity.Text = "Connectivity";
+            this.checkConnectivity.UseVisualStyleBackColor = true;
+            // 
+            // textPassword
+            // 
+            this.textPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textPassword.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textPassword.ForeColor = System.Drawing.Color.DarkRed;
+            this.textPassword.Location = new System.Drawing.Point(561, 182);
+            this.textPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.textPassword.Name = "textPassword";
+            this.textPassword.PasswordChar = '*';
+            this.textPassword.Size = new System.Drawing.Size(302, 28);
+            this.textPassword.TabIndex = 94;
+            this.textPassword.UseSystemPasswordChar = true;
+            // 
+            // textUser
+            // 
+            this.textUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textUser.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textUser.ForeColor = System.Drawing.Color.Black;
+            this.textUser.Location = new System.Drawing.Point(161, 182);
+            this.textUser.Margin = new System.Windows.Forms.Padding(2);
+            this.textUser.Name = "textUser";
+            this.textUser.Size = new System.Drawing.Size(288, 28);
+            this.textUser.TabIndex = 93;
+            this.textUser.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label7.Location = new System.Drawing.Point(35, 184);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(87, 18);
+            this.label7.TabIndex = 92;
+            this.label7.Text = "User Name:";
             // 
             // btnCheck
             // 
@@ -96,8 +178,8 @@ namespace WinSCPFileTransfer
             this.btnCheck.IconColor = System.Drawing.Color.Maroon;
             this.btnCheck.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnCheck.IconSize = 20;
-            this.btnCheck.Location = new System.Drawing.Point(135, 180);
-            this.btnCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCheck.Location = new System.Drawing.Point(161, 227);
+            this.btnCheck.Margin = new System.Windows.Forms.Padding(4);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(91, 29);
             this.btnCheck.TabIndex = 91;
@@ -110,47 +192,27 @@ namespace WinSCPFileTransfer
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label6.Location = new System.Drawing.Point(14, 185);
+            this.label6.Location = new System.Drawing.Point(34, 232);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 18);
             this.label6.TabIndex = 89;
             this.label6.Text = "Reachability:";
             // 
-            // textVersion
-            // 
-            this.textVersion.Location = new System.Drawing.Point(135, 121);
-            this.textVersion.Margin = new System.Windows.Forms.Padding(2);
-            this.textVersion.Name = "textVersion";
-            this.textVersion.Size = new System.Drawing.Size(288, 26);
-            this.textVersion.TabIndex = 88;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label5.Location = new System.Drawing.Point(12, 125);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(90, 18);
-            this.label5.TabIndex = 87;
-            this.label5.Text = "App Version:";
-            // 
             // comboCategory
             // 
             this.comboCategory.FormattingEnabled = true;
-            this.comboCategory.Location = new System.Drawing.Point(535, 69);
+            this.comboCategory.Location = new System.Drawing.Point(561, 92);
             this.comboCategory.Margin = new System.Windows.Forms.Padding(2);
             this.comboCategory.Name = "comboCategory";
-            this.comboCategory.Size = new System.Drawing.Size(287, 26);
+            this.comboCategory.Size = new System.Drawing.Size(302, 26);
             this.comboCategory.TabIndex = 86;
             this.comboCategory.SelectionChangeCommitted += new System.EventHandler(this.comboCategory_SelectionChangeCommitted);
             // 
             // comboLocation
             // 
             this.comboLocation.FormattingEnabled = true;
-            this.comboLocation.Location = new System.Drawing.Point(135, 68);
+            this.comboLocation.Location = new System.Drawing.Point(161, 42);
             this.comboLocation.Margin = new System.Windows.Forms.Padding(2);
             this.comboLocation.Name = "comboLocation";
             this.comboLocation.Size = new System.Drawing.Size(288, 26);
@@ -159,16 +221,16 @@ namespace WinSCPFileTransfer
             // 
             // textIP
             // 
-            this.textIP.Location = new System.Drawing.Point(535, 21);
+            this.textIP.Location = new System.Drawing.Point(561, 136);
             this.textIP.Margin = new System.Windows.Forms.Padding(2);
             this.textIP.Name = "textIP";
-            this.textIP.Size = new System.Drawing.Size(287, 26);
+            this.textIP.Size = new System.Drawing.Size(302, 26);
             this.textIP.TabIndex = 84;
             // 
             // textServerName
             // 
             this.textServerName.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textServerName.Location = new System.Drawing.Point(135, 21);
+            this.textServerName.Location = new System.Drawing.Point(161, 134);
             this.textServerName.Margin = new System.Windows.Forms.Padding(2);
             this.textServerName.Name = "textServerName";
             this.textServerName.Size = new System.Drawing.Size(288, 28);
@@ -179,7 +241,7 @@ namespace WinSCPFileTransfer
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label4.Location = new System.Drawing.Point(444, 71);
+            this.label4.Location = new System.Drawing.Point(470, 92);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 18);
@@ -191,19 +253,19 @@ namespace WinSCPFileTransfer
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label3.Location = new System.Drawing.Point(12, 68);
+            this.label3.Location = new System.Drawing.Point(35, 45);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 18);
+            this.label3.Size = new System.Drawing.Size(85, 18);
             this.label3.TabIndex = 81;
-            this.label3.Text = "Location:";
+            this.label3.Text = "Store Code:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label2.Location = new System.Drawing.Point(444, 25);
+            this.label2.Location = new System.Drawing.Point(470, 140);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 18);
@@ -215,12 +277,12 @@ namespace WinSCPFileTransfer
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label1.Location = new System.Drawing.Point(9, 21);
+            this.label1.Location = new System.Drawing.Point(35, 134);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 18);
+            this.label1.Size = new System.Drawing.Size(106, 18);
             this.label1.TabIndex = 79;
-            this.label1.Text = "Server Name:";
+            this.label1.Text = "System Name:";
             // 
             // panelButton
             // 
@@ -229,10 +291,10 @@ namespace WinSCPFileTransfer
             this.panelButton.Controls.Add(this.btnClear);
             this.panelButton.Controls.Add(this.btnSave);
             this.panelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelButton.Location = new System.Drawing.Point(0, 626);
-            this.panelButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelButton.Location = new System.Drawing.Point(0, 525);
+            this.panelButton.Margin = new System.Windows.Forms.Padding(4);
             this.panelButton.Name = "panelButton";
-            this.panelButton.Size = new System.Drawing.Size(888, 50);
+            this.panelButton.Size = new System.Drawing.Size(905, 54);
             this.panelButton.TabIndex = 84;
             // 
             // btnDelete
@@ -297,12 +359,15 @@ namespace WinSCPFileTransfer
             // 
             // panelGrid
             // 
+            this.panelGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(25)))), ((int)(((byte)(72)))));
+            this.panelGrid.Controls.Add(this.panel2);
+            this.panelGrid.Controls.Add(this.panel1);
             this.panelGrid.Controls.Add(this.dgvSrv);
             this.panelGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGrid.Location = new System.Drawing.Point(0, 239);
-            this.panelGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelGrid.Location = new System.Drawing.Point(0, 307);
+            this.panelGrid.Margin = new System.Windows.Forms.Padding(4);
             this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Size = new System.Drawing.Size(888, 437);
+            this.panelGrid.Size = new System.Drawing.Size(905, 272);
             this.panelGrid.TabIndex = 85;
             // 
             // dgvSrv
@@ -318,89 +383,115 @@ namespace WinSCPFileTransfer
             this.dgvSrv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSrv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSrv.Location = new System.Drawing.Point(0, 0);
-            this.dgvSrv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvSrv.Margin = new System.Windows.Forms.Padding(4);
             this.dgvSrv.Name = "dgvSrv";
             this.dgvSrv.RowHeadersVisible = false;
             this.dgvSrv.RowHeadersWidth = 51;
-            this.dgvSrv.Size = new System.Drawing.Size(888, 437);
+            this.dgvSrv.Size = new System.Drawing.Size(905, 272);
             this.dgvSrv.TabIndex = 80;
             this.dgvSrv.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSrv_CellDoubleClick);
             // 
-            // label7
+            // label8
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label7.Location = new System.Drawing.Point(444, 125);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(76, 18);
-            this.label7.TabIndex = 92;
-            this.label7.Text = "Credential:";
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label8.Location = new System.Drawing.Point(470, 45);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 18);
+            this.label8.TabIndex = 98;
+            this.label8.Text = "Region:";
             // 
-            // textUser
+            // label9
             // 
-            this.textUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textUser.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textUser.ForeColor = System.Drawing.Color.Black;
-            this.textUser.Location = new System.Drawing.Point(535, 121);
-            this.textUser.Margin = new System.Windows.Forms.Padding(2);
-            this.textUser.Name = "textUser";
-            this.textUser.Size = new System.Drawing.Size(137, 28);
-            this.textUser.TabIndex = 93;
-            this.textUser.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label9.Location = new System.Drawing.Point(35, 92);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(91, 18);
+            this.label9.TabIndex = 99;
+            this.label9.Text = "Store Name:";
             // 
-            // textPassword
+            // textBox1
             // 
-            this.textPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textPassword.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textPassword.ForeColor = System.Drawing.Color.DarkRed;
-            this.textPassword.Location = new System.Drawing.Point(676, 121);
-            this.textPassword.Margin = new System.Windows.Forms.Padding(2);
-            this.textPassword.Name = "textPassword";
-            this.textPassword.PasswordChar = '*';
-            this.textPassword.Size = new System.Drawing.Size(146, 28);
-            this.textPassword.TabIndex = 94;
-            this.textPassword.UseSystemPasswordChar = true;
+            this.textBox1.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(558, 40);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(305, 28);
+            this.textBox1.TabIndex = 100;
             // 
-            // checkConnectivity
+            // textBox2
             // 
-            this.checkConnectivity.AutoSize = true;
-            this.checkConnectivity.ForeColor = System.Drawing.Color.Gainsboro;
-            this.checkConnectivity.Location = new System.Drawing.Point(251, 185);
-            this.checkConnectivity.Name = "checkConnectivity";
-            this.checkConnectivity.Size = new System.Drawing.Size(108, 22);
-            this.checkConnectivity.TabIndex = 95;
-            this.checkConnectivity.Text = "Connectivity";
-            this.checkConnectivity.UseVisualStyleBackColor = true;
+            this.textBox2.Location = new System.Drawing.Point(161, 89);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(288, 26);
+            this.textBox2.TabIndex = 101;
             // 
-            // checkSSH
+            // label5
             // 
-            this.checkSSH.AutoSize = true;
-            this.checkSSH.ForeColor = System.Drawing.Color.Gainsboro;
-            this.checkSSH.Location = new System.Drawing.Point(386, 184);
-            this.checkSSH.Name = "checkSSH";
-            this.checkSSH.Size = new System.Drawing.Size(102, 22);
-            this.checkSSH.TabIndex = 96;
-            this.checkSSH.Text = "SSH Status";
-            this.checkSSH.UseVisualStyleBackColor = true;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label5.Location = new System.Drawing.Point(470, 186);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 18);
+            this.label5.TabIndex = 102;
+            this.label5.Text = "Password:";
             // 
-            // checkFingerprint
+            // panel1
             // 
-            this.checkFingerprint.AutoSize = true;
-            this.checkFingerprint.ForeColor = System.Drawing.Color.Gainsboro;
-            this.checkFingerprint.Location = new System.Drawing.Point(517, 184);
-            this.checkFingerprint.Name = "checkFingerprint";
-            this.checkFingerprint.Size = new System.Drawing.Size(194, 22);
-            this.checkFingerprint.TabIndex = 97;
-            this.checkFingerprint.Text = "Generate SHA Fingerprint";
-            this.checkFingerprint.UseVisualStyleBackColor = true;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(33, 272);
+            this.panel1.TabIndex = 81;
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(873, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(32, 272);
+            this.panel2.TabIndex = 82;
+            // 
+            // textBoxFilter
+            // 
+            this.textBoxFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxFilter.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxFilter.ForeColor = System.Drawing.Color.DarkRed;
+            this.textBoxFilter.Location = new System.Drawing.Point(32, 279);
+            this.textBoxFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxFilter.Name = "textBoxFilter";
+            this.textBoxFilter.PasswordChar = '*';
+            this.textBoxFilter.Size = new System.Drawing.Size(220, 28);
+            this.textBoxFilter.TabIndex = 103;
+            this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
+            // 
+            // comboFilter
+            // 
+            this.comboFilter.BackColor = System.Drawing.Color.AliceBlue;
+            this.comboFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboFilter.FormattingEnabled = true;
+            this.comboFilter.IntegralHeight = false;
+            this.comboFilter.ItemHeight = 18;
+            this.comboFilter.Location = new System.Drawing.Point(252, 280);
+            this.comboFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.comboFilter.Name = "comboFilter";
+            this.comboFilter.Size = new System.Drawing.Size(200, 26);
+            this.comboFilter.TabIndex = 104;
             // 
             // FormServerMgmt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(888, 676);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(25)))), ((int)(((byte)(72)))));
+            this.ClientSize = new System.Drawing.Size(905, 579);
             this.Controls.Add(this.panelButton);
             this.Controls.Add(this.panelGrid);
             this.Controls.Add(this.panelServer);
@@ -424,8 +515,6 @@ namespace WinSCPFileTransfer
         private System.Windows.Forms.Panel panelServer;
         private FontAwesome.Sharp.IconButton btnCheck;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textVersion;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboCategory;
         private System.Windows.Forms.ComboBox comboLocation;
         private System.Windows.Forms.TextBox textIP;
@@ -446,5 +535,14 @@ namespace WinSCPFileTransfer
         private System.Windows.Forms.CheckBox checkSSH;
         private System.Windows.Forms.CheckBox checkConnectivity;
         private System.Windows.Forms.TextBox textPassword;
+        private System.Windows.Forms.TextBox textBoxFilter;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox comboFilter;
     }
 }
