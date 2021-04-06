@@ -194,5 +194,9 @@ namespace WinSCPFileTransfer
             Application.Exit();
         }
 
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
