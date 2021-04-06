@@ -38,7 +38,7 @@ namespace WinSCPFileTransfer
 
         private void FormPatchApply_Load(object sender, EventArgs e)
         {
-            string sql = "SELECT location_id,location FROM dbo.location";
+            string sql = "SELECT location_id,location FROM dbo.store";
             DataTable dt = Dbconnection.GetDataTable(sql);
             for (int i = 0; i < dt.Rows.Count; i++)
             {

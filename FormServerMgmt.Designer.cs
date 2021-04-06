@@ -31,6 +31,13 @@ namespace WinSCPFileTransfer
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelServer = new System.Windows.Forms.Panel();
+            this.comboFilter = new System.Windows.Forms.ComboBox();
+            this.textBoxFilter = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textStoreName = new System.Windows.Forms.TextBox();
+            this.textRegion = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.checkFingerprint = new System.Windows.Forms.CheckBox();
             this.checkSSH = new System.Windows.Forms.CheckBox();
             this.checkConnectivity = new System.Windows.Forms.CheckBox();
@@ -40,7 +47,7 @@ namespace WinSCPFileTransfer
             this.btnCheck = new FontAwesome.Sharp.IconButton();
             this.label6 = new System.Windows.Forms.Label();
             this.comboCategory = new System.Windows.Forms.ComboBox();
-            this.comboLocation = new System.Windows.Forms.ComboBox();
+            this.comboStore = new System.Windows.Forms.ComboBox();
             this.textIP = new System.Windows.Forms.TextBox();
             this.textServerName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,16 +59,9 @@ namespace WinSCPFileTransfer
             this.btnClear = new FontAwesome.Sharp.IconButton();
             this.btnSave = new FontAwesome.Sharp.IconButton();
             this.panelGrid = new System.Windows.Forms.Panel();
-            this.dgvSrv = new System.Windows.Forms.DataGridView();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.textBoxFilter = new System.Windows.Forms.TextBox();
-            this.comboFilter = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dgvSrv = new System.Windows.Forms.DataGridView();
             this.panelServer.SuspendLayout();
             this.panelButton.SuspendLayout();
             this.panelGrid.SuspendLayout();
@@ -74,8 +74,8 @@ namespace WinSCPFileTransfer
             this.panelServer.Controls.Add(this.comboFilter);
             this.panelServer.Controls.Add(this.textBoxFilter);
             this.panelServer.Controls.Add(this.label5);
-            this.panelServer.Controls.Add(this.textBox2);
-            this.panelServer.Controls.Add(this.textBox1);
+            this.panelServer.Controls.Add(this.textStoreName);
+            this.panelServer.Controls.Add(this.textRegion);
             this.panelServer.Controls.Add(this.label9);
             this.panelServer.Controls.Add(this.label8);
             this.panelServer.Controls.Add(this.checkFingerprint);
@@ -87,7 +87,7 @@ namespace WinSCPFileTransfer
             this.panelServer.Controls.Add(this.btnCheck);
             this.panelServer.Controls.Add(this.label6);
             this.panelServer.Controls.Add(this.comboCategory);
-            this.panelServer.Controls.Add(this.comboLocation);
+            this.panelServer.Controls.Add(this.comboStore);
             this.panelServer.Controls.Add(this.textIP);
             this.panelServer.Controls.Add(this.textServerName);
             this.panelServer.Controls.Add(this.label4);
@@ -101,6 +101,85 @@ namespace WinSCPFileTransfer
             this.panelServer.Size = new System.Drawing.Size(905, 307);
             this.panelServer.TabIndex = 83;
             this.panelServer.Paint += new System.Windows.Forms.PaintEventHandler(this.panelServer_Paint);
+            // 
+            // comboFilter
+            // 
+            this.comboFilter.BackColor = System.Drawing.Color.AliceBlue;
+            this.comboFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboFilter.FormattingEnabled = true;
+            this.comboFilter.IntegralHeight = false;
+            this.comboFilter.ItemHeight = 18;
+            this.comboFilter.Location = new System.Drawing.Point(252, 280);
+            this.comboFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.comboFilter.Name = "comboFilter";
+            this.comboFilter.Size = new System.Drawing.Size(200, 26);
+            this.comboFilter.TabIndex = 104;
+            // 
+            // textBoxFilter
+            // 
+            this.textBoxFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxFilter.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxFilter.ForeColor = System.Drawing.Color.DarkRed;
+            this.textBoxFilter.Location = new System.Drawing.Point(32, 279);
+            this.textBoxFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxFilter.Name = "textBoxFilter";
+            this.textBoxFilter.PasswordChar = '*';
+            this.textBoxFilter.Size = new System.Drawing.Size(220, 28);
+            this.textBoxFilter.TabIndex = 103;
+            this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label5.Location = new System.Drawing.Point(470, 186);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 18);
+            this.label5.TabIndex = 102;
+            this.label5.Text = "Password:";
+            // 
+            // textStoreName
+            // 
+            this.textStoreName.Location = new System.Drawing.Point(161, 89);
+            this.textStoreName.Margin = new System.Windows.Forms.Padding(2);
+            this.textStoreName.Name = "textStoreName";
+            this.textStoreName.Size = new System.Drawing.Size(288, 26);
+            this.textStoreName.TabIndex = 101;
+            // 
+            // textRegion
+            // 
+            this.textRegion.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textRegion.Location = new System.Drawing.Point(558, 40);
+            this.textRegion.Margin = new System.Windows.Forms.Padding(2);
+            this.textRegion.Name = "textRegion";
+            this.textRegion.Size = new System.Drawing.Size(305, 28);
+            this.textRegion.TabIndex = 100;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label9.Location = new System.Drawing.Point(35, 92);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(91, 18);
+            this.label9.TabIndex = 99;
+            this.label9.Text = "Store Name:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label8.Location = new System.Drawing.Point(470, 45);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 18);
+            this.label8.TabIndex = 98;
+            this.label8.Text = "Region:";
             // 
             // checkFingerprint
             // 
@@ -209,15 +288,15 @@ namespace WinSCPFileTransfer
             this.comboCategory.TabIndex = 86;
             this.comboCategory.SelectionChangeCommitted += new System.EventHandler(this.comboCategory_SelectionChangeCommitted);
             // 
-            // comboLocation
+            // comboStore
             // 
-            this.comboLocation.FormattingEnabled = true;
-            this.comboLocation.Location = new System.Drawing.Point(161, 42);
-            this.comboLocation.Margin = new System.Windows.Forms.Padding(2);
-            this.comboLocation.Name = "comboLocation";
-            this.comboLocation.Size = new System.Drawing.Size(288, 26);
-            this.comboLocation.TabIndex = 85;
-            this.comboLocation.SelectionChangeCommitted += new System.EventHandler(this.comboLocation_SelectionChangeCommitted);
+            this.comboStore.FormattingEnabled = true;
+            this.comboStore.Location = new System.Drawing.Point(161, 42);
+            this.comboStore.Margin = new System.Windows.Forms.Padding(2);
+            this.comboStore.Name = "comboStore";
+            this.comboStore.Size = new System.Drawing.Size(288, 26);
+            this.comboStore.TabIndex = 85;
+            this.comboStore.SelectionChangeCommitted += new System.EventHandler(this.comboStore_SelectionChangeCommitted);
             // 
             // textIP
             // 
@@ -291,7 +370,7 @@ namespace WinSCPFileTransfer
             this.panelButton.Controls.Add(this.btnClear);
             this.panelButton.Controls.Add(this.btnSave);
             this.panelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelButton.Location = new System.Drawing.Point(0, 525);
+            this.panelButton.Location = new System.Drawing.Point(0, 566);
             this.panelButton.Margin = new System.Windows.Forms.Padding(4);
             this.panelButton.Name = "panelButton";
             this.panelButton.Size = new System.Drawing.Size(905, 54);
@@ -307,7 +386,7 @@ namespace WinSCPFileTransfer
             this.btnDelete.IconColor = System.Drawing.Color.MediumPurple;
             this.btnDelete.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnDelete.IconSize = 32;
-            this.btnDelete.Location = new System.Drawing.Point(517, 4);
+            this.btnDelete.Location = new System.Drawing.Point(506, -3);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(116, 46);
@@ -327,7 +406,7 @@ namespace WinSCPFileTransfer
             this.btnClear.IconColor = System.Drawing.Color.MediumPurple;
             this.btnClear.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnClear.IconSize = 32;
-            this.btnClear.Location = new System.Drawing.Point(392, 4);
+            this.btnClear.Location = new System.Drawing.Point(381, -3);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(120, 46);
@@ -347,7 +426,7 @@ namespace WinSCPFileTransfer
             this.btnSave.IconColor = System.Drawing.Color.MediumPurple;
             this.btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnSave.IconSize = 32;
-            this.btnSave.Location = new System.Drawing.Point(279, 4);
+            this.btnSave.Location = new System.Drawing.Point(268, -3);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(108, 46);
@@ -367,8 +446,24 @@ namespace WinSCPFileTransfer
             this.panelGrid.Location = new System.Drawing.Point(0, 307);
             this.panelGrid.Margin = new System.Windows.Forms.Padding(4);
             this.panelGrid.Name = "panelGrid";
-            this.panelGrid.Size = new System.Drawing.Size(905, 272);
+            this.panelGrid.Size = new System.Drawing.Size(905, 313);
             this.panelGrid.TabIndex = 85;
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(873, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(32, 313);
+            this.panel2.TabIndex = 82;
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(33, 313);
+            this.panel1.TabIndex = 81;
             // 
             // dgvSrv
             // 
@@ -380,118 +475,25 @@ namespace WinSCPFileTransfer
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvSrv.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvSrv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvSrv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSrv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvSrv.Location = new System.Drawing.Point(0, 0);
+            this.dgvSrv.Location = new System.Drawing.Point(40, 8);
             this.dgvSrv.Margin = new System.Windows.Forms.Padding(4);
             this.dgvSrv.Name = "dgvSrv";
             this.dgvSrv.RowHeadersVisible = false;
             this.dgvSrv.RowHeadersWidth = 51;
-            this.dgvSrv.Size = new System.Drawing.Size(905, 272);
+            this.dgvSrv.Size = new System.Drawing.Size(826, 242);
             this.dgvSrv.TabIndex = 80;
             this.dgvSrv.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSrv_CellDoubleClick);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label8.Location = new System.Drawing.Point(470, 45);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 18);
-            this.label8.TabIndex = 98;
-            this.label8.Text = "Region:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label9.Location = new System.Drawing.Point(35, 92);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(91, 18);
-            this.label9.TabIndex = 99;
-            this.label9.Text = "Store Name:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(558, 40);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(305, 28);
-            this.textBox1.TabIndex = 100;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(161, 89);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(288, 26);
-            this.textBox2.TabIndex = 101;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label5.Location = new System.Drawing.Point(470, 186);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(74, 18);
-            this.label5.TabIndex = 102;
-            this.label5.Text = "Password:";
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(33, 272);
-            this.panel1.TabIndex = 81;
-            // 
-            // panel2
-            // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(873, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(32, 272);
-            this.panel2.TabIndex = 82;
-            // 
-            // textBoxFilter
-            // 
-            this.textBoxFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxFilter.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxFilter.ForeColor = System.Drawing.Color.DarkRed;
-            this.textBoxFilter.Location = new System.Drawing.Point(32, 279);
-            this.textBoxFilter.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxFilter.Name = "textBoxFilter";
-            this.textBoxFilter.PasswordChar = '*';
-            this.textBoxFilter.Size = new System.Drawing.Size(220, 28);
-            this.textBoxFilter.TabIndex = 103;
-            this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
-            // 
-            // comboFilter
-            // 
-            this.comboFilter.BackColor = System.Drawing.Color.AliceBlue;
-            this.comboFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboFilter.FormattingEnabled = true;
-            this.comboFilter.IntegralHeight = false;
-            this.comboFilter.ItemHeight = 18;
-            this.comboFilter.Location = new System.Drawing.Point(252, 280);
-            this.comboFilter.Margin = new System.Windows.Forms.Padding(2);
-            this.comboFilter.Name = "comboFilter";
-            this.comboFilter.Size = new System.Drawing.Size(200, 26);
-            this.comboFilter.TabIndex = 104;
             // 
             // FormServerMgmt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(25)))), ((int)(((byte)(72)))));
-            this.ClientSize = new System.Drawing.Size(905, 579);
+            this.ClientSize = new System.Drawing.Size(905, 620);
             this.Controls.Add(this.panelButton);
             this.Controls.Add(this.panelGrid);
             this.Controls.Add(this.panelServer);
@@ -516,7 +518,7 @@ namespace WinSCPFileTransfer
         private FontAwesome.Sharp.IconButton btnCheck;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboCategory;
-        private System.Windows.Forms.ComboBox comboLocation;
+        private System.Windows.Forms.ComboBox comboStore;
         private System.Windows.Forms.TextBox textIP;
         private System.Windows.Forms.TextBox textServerName;
         private System.Windows.Forms.Label label4;
@@ -537,8 +539,8 @@ namespace WinSCPFileTransfer
         private System.Windows.Forms.TextBox textPassword;
         private System.Windows.Forms.TextBox textBoxFilter;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textStoreName;
+        private System.Windows.Forms.TextBox textRegion;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel2;

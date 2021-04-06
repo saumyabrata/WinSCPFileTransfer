@@ -39,13 +39,13 @@ namespace WinSCPFileTransfer
             this.panelLogo = new System.Windows.Forms.Panel();
             this.btnHome = new System.Windows.Forms.PictureBox();
             this.panelTitleBar = new System.Windows.Forms.Panel();
+            this.btnQuit = new FontAwesome.Sharp.IconButton();
             this.btnMinimize = new FontAwesome.Sharp.IconButton();
             this.btnMaximize = new FontAwesome.Sharp.IconButton();
             this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.panelShadow = new System.Windows.Forms.Panel();
             this.panelDesktop = new System.Windows.Forms.Panel();
-            this.btnQuit = new FontAwesome.Sharp.IconButton();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
@@ -65,7 +65,7 @@ namespace WinSCPFileTransfer
             this.panelMenu.Controls.Add(this.panelLogo);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
-            this.panelMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelMenu.Margin = new System.Windows.Forms.Padding(4);
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(293, 554);
             this.panelMenu.TabIndex = 0;
@@ -82,7 +82,7 @@ namespace WinSCPFileTransfer
             this.btnExit.IconSize = 32;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExit.Location = new System.Drawing.Point(0, 300);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Padding = new System.Windows.Forms.Padding(13, 0, 27, 0);
             this.btnExit.Size = new System.Drawing.Size(293, 46);
@@ -105,7 +105,7 @@ namespace WinSCPFileTransfer
             this.btnSchedule.IconSize = 32;
             this.btnSchedule.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSchedule.Location = new System.Drawing.Point(0, 254);
-            this.btnSchedule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSchedule.Margin = new System.Windows.Forms.Padding(4);
             this.btnSchedule.Name = "btnSchedule";
             this.btnSchedule.Padding = new System.Windows.Forms.Padding(13, 0, 27, 0);
             this.btnSchedule.Size = new System.Drawing.Size(293, 46);
@@ -128,7 +128,7 @@ namespace WinSCPFileTransfer
             this.btnApply.IconSize = 32;
             this.btnApply.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnApply.Location = new System.Drawing.Point(0, 208);
-            this.btnApply.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnApply.Margin = new System.Windows.Forms.Padding(4);
             this.btnApply.Name = "btnApply";
             this.btnApply.Padding = new System.Windows.Forms.Padding(13, 0, 27, 0);
             this.btnApply.Size = new System.Drawing.Size(293, 46);
@@ -151,7 +151,7 @@ namespace WinSCPFileTransfer
             this.btnDownload.IconSize = 32;
             this.btnDownload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDownload.Location = new System.Drawing.Point(0, 162);
-            this.btnDownload.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDownload.Margin = new System.Windows.Forms.Padding(4);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Padding = new System.Windows.Forms.Padding(13, 0, 27, 0);
             this.btnDownload.Size = new System.Drawing.Size(293, 46);
@@ -174,7 +174,7 @@ namespace WinSCPFileTransfer
             this.btnServer.IconSize = 32;
             this.btnServer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnServer.Location = new System.Drawing.Point(0, 116);
-            this.btnServer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnServer.Margin = new System.Windows.Forms.Padding(4);
             this.btnServer.Name = "btnServer";
             this.btnServer.Padding = new System.Windows.Forms.Padding(13, 0, 27, 0);
             this.btnServer.Size = new System.Drawing.Size(293, 46);
@@ -197,7 +197,7 @@ namespace WinSCPFileTransfer
             this.btnDashboard.IconSize = 32;
             this.btnDashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDashboard.Location = new System.Drawing.Point(0, 70);
-            this.btnDashboard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDashboard.Margin = new System.Windows.Forms.Padding(4);
             this.btnDashboard.Name = "btnDashboard";
             this.btnDashboard.Padding = new System.Windows.Forms.Padding(13, 0, 27, 0);
             this.btnDashboard.Size = new System.Drawing.Size(293, 46);
@@ -213,7 +213,7 @@ namespace WinSCPFileTransfer
             this.panelLogo.Controls.Add(this.btnHome);
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelLogo.Margin = new System.Windows.Forms.Padding(4);
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(293, 70);
             this.panelLogo.TabIndex = 1;
@@ -223,7 +223,7 @@ namespace WinSCPFileTransfer
             this.btnHome.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnHome.Image = global::WinSCPFileTransfer.Properties.Resources.connect;
             this.btnHome.Location = new System.Drawing.Point(0, 0);
-            this.btnHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnHome.Margin = new System.Windows.Forms.Padding(4);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(293, 70);
             this.btnHome.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -241,11 +241,28 @@ namespace WinSCPFileTransfer
             this.panelTitleBar.Controls.Add(this.iconCurrentChildForm);
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitleBar.Location = new System.Drawing.Point(293, 0);
-            this.panelTitleBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelTitleBar.Margin = new System.Windows.Forms.Padding(4);
             this.panelTitleBar.Name = "panelTitleBar";
             this.panelTitleBar.Size = new System.Drawing.Size(774, 50);
             this.panelTitleBar.TabIndex = 2;
             this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
+            // 
+            // btnQuit
+            // 
+            this.btnQuit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnQuit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(25)))), ((int)(((byte)(62)))));
+            this.btnQuit.FlatAppearance.BorderSize = 0;
+            this.btnQuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuit.IconChar = FontAwesome.Sharp.IconChar.SignOutAlt;
+            this.btnQuit.IconColor = System.Drawing.Color.MediumPurple;
+            this.btnQuit.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnQuit.IconSize = 20;
+            this.btnQuit.Location = new System.Drawing.Point(669, 12);
+            this.btnQuit.Name = "btnQuit";
+            this.btnQuit.Size = new System.Drawing.Size(24, 23);
+            this.btnQuit.TabIndex = 5;
+            this.btnQuit.UseVisualStyleBackColor = false;
+            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
             // btnMinimize
             // 
@@ -256,7 +273,7 @@ namespace WinSCPFileTransfer
             this.btnMinimize.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnMinimize.IconSize = 16;
             this.btnMinimize.Location = new System.Drawing.Point(700, 15);
-            this.btnMinimize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMinimize.Margin = new System.Windows.Forms.Padding(4);
             this.btnMinimize.Name = "btnMinimize";
             this.btnMinimize.Size = new System.Drawing.Size(25, 14);
             this.btnMinimize.TabIndex = 4;
@@ -272,7 +289,7 @@ namespace WinSCPFileTransfer
             this.btnMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnMaximize.IconSize = 16;
             this.btnMaximize.Location = new System.Drawing.Point(733, 16);
-            this.btnMaximize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMaximize.Margin = new System.Windows.Forms.Padding(4);
             this.btnMaximize.Name = "btnMaximize";
             this.btnMaximize.Size = new System.Drawing.Size(25, 14);
             this.btnMaximize.TabIndex = 3;
@@ -302,7 +319,7 @@ namespace WinSCPFileTransfer
             this.iconCurrentChildForm.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconCurrentChildForm.IconSize = 38;
             this.iconCurrentChildForm.Location = new System.Drawing.Point(8, 12);
-            this.iconCurrentChildForm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconCurrentChildForm.Margin = new System.Windows.Forms.Padding(4);
             this.iconCurrentChildForm.Name = "iconCurrentChildForm";
             this.iconCurrentChildForm.Size = new System.Drawing.Size(41, 38);
             this.iconCurrentChildForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -314,7 +331,7 @@ namespace WinSCPFileTransfer
             this.panelShadow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(24)))), ((int)(((byte)(58)))));
             this.panelShadow.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelShadow.Location = new System.Drawing.Point(293, 50);
-            this.panelShadow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelShadow.Margin = new System.Windows.Forms.Padding(4);
             this.panelShadow.Name = "panelShadow";
             this.panelShadow.Size = new System.Drawing.Size(774, 12);
             this.panelShadow.TabIndex = 3;
@@ -329,22 +346,6 @@ namespace WinSCPFileTransfer
             this.panelDesktop.Size = new System.Drawing.Size(774, 492);
             this.panelDesktop.TabIndex = 4;
             // 
-            // btnQuit
-            // 
-            this.btnQuit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(25)))), ((int)(((byte)(62)))));
-            this.btnQuit.FlatAppearance.BorderSize = 0;
-            this.btnQuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuit.IconChar = FontAwesome.Sharp.IconChar.SignOutAlt;
-            this.btnQuit.IconColor = System.Drawing.Color.MediumPurple;
-            this.btnQuit.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnQuit.IconSize = 20;
-            this.btnQuit.Location = new System.Drawing.Point(669, 12);
-            this.btnQuit.Name = "btnQuit";
-            this.btnQuit.Size = new System.Drawing.Size(24, 23);
-            this.btnQuit.TabIndex = 5;
-            this.btnQuit.UseVisualStyleBackColor = false;
-            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
-            // 
             // FormMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -354,7 +355,7 @@ namespace WinSCPFileTransfer
             this.Controls.Add(this.panelShadow);
             this.Controls.Add(this.panelTitleBar);
             this.Controls.Add(this.panelMenu);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMainMenu";
             this.Text = "FormMainMenu";
             this.Resize += new System.EventHandler(this.FormMainMenu_Resize);
