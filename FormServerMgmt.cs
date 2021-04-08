@@ -5,10 +5,14 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using WinSCP;
 using WinSCPFileTransfer.Global;
 
 namespace WinSCPFileTransfer
@@ -22,6 +26,8 @@ namespace WinSCPFileTransfer
         bool connectivitystatus = false;
         bool sshstatus = false;
         bool shastatus = false;
+        const string KnownHostsFile = "KnownHosts.xml";
+        const int SshPortNumber = 22;
 
 
         public FormServerMgmt()
@@ -142,7 +148,7 @@ namespace WinSCPFileTransfer
                                 sqlCmd.Parameters.AddWithValue("@category_id", categoryid);
                                 sqlCmd.Parameters.AddWithValue("@connectivity", connectivitystatus);
                                 sqlCmd.Parameters.AddWithValue("@SSH_Status", sshstatus);
-                                sqlCmd.Parameters.AddWithValue("@fingerprint_generated", sshstatus);
+                                sqlCmd.Parameters.AddWithValue("@fingerprint_generated", shastatus);
                                 sqlCmd.Parameters.AddWithValue("@created_by", "Admin");
                                 sqlCmd.Parameters.AddWithValue("@created_on", DateTime.UtcNow);
 
@@ -187,19 +193,19 @@ namespace WinSCPFileTransfer
                                 sqlCmd.Parameters.AddWithValue("@category_id", categoryid);
                                 sqlCmd.Parameters.AddWithValue("@connectivity", connectivitystatus);
                                 sqlCmd.Parameters.AddWithValue("@SSH_Status", sshstatus);
-                                sqlCmd.Parameters.AddWithValue("@fingerprint_generated", sshstatus);
+                                sqlCmd.Parameters.AddWithValue("@fingerprint_generated", shastatus);
                                 sqlCmd.Parameters.AddWithValue("@modified_by", "Admin");
                                 sqlCmd.Parameters.AddWithValue("@modified_on", DateTime.UtcNow);
                                 sqlCmd.Parameters.AddWithValue("@rowid", rowid);
                                 sqlCmd.ExecuteNonQuery();
-                                //int numRes = sqlCmd.ExecuteNonQuery();
-                                //if (numRes > 0)
-                                //{
-                                //    MessageBox.Show("Record Updated Successfully !!!");
-                                //    ClearAllData();
-                                //}
-                                //else
-                                //    MessageBox.Show("Please Try Again !!!");
+                                int numRes = sqlCmd.ExecuteNonQuery();
+                                if (numRes > 0)
+                                {
+                                    MessageBox.Show("Record Updated Successfully !!!");
+                                    ClearAllData();
+                                }
+                                else
+                                    MessageBox.Show("Please Try Again !!!");
 
 
                             }
@@ -419,6 +425,163 @@ namespace WinSCPFileTransfer
                     connection.Close();
                 }
                 return null;
+            }
+        }
+
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            if (IsMachineUp(textIP.Text.Trim()) == true)
+            {
+                checkConnectivity.CheckState = CheckState.Checked;
+            }
+            else
+            {
+                checkConnectivity.CheckState = CheckState.Unchecked;
+            }
+
+            if (string.IsNullOrWhiteSpace(textIP.Text))
+            {
+                MessageBox.Show("Enter IP Address of system !!!");
+                textIP.Select();
+            }
+            else if (string.IsNullOrWhiteSpace(textUser.Text))
+            {
+                MessageBox.Show("Username is Blank !!!");
+                textUser.Select();
+            }
+            else if (string.IsNullOrWhiteSpace(textPassword.Text))
+            {
+                MessageBox.Show("Password is Blank !!!");
+                textPassword.Select();
+            }
+            else
+            {
+                string mipaddress = textIP.Text.Trim();
+                string musername = textUser.Text.Trim();
+                string mpassword = textPassword.Text.Trim();
+                string output = Main_Process(mipaddress, musername, mpassword);
+                if (output == "")
+                {
+                    checkConnectivity.CheckState = CheckState.Unchecked;
+                    checkBit.CheckState = CheckState.Unchecked;
+                }
+                else
+                {
+                    //textBox1.Text = output.Trim();
+                }
+            }
+
+        }
+
+        private static bool IsMachineUp(string hostName)
+        {
+            bool retVal = false;
+            try
+            {
+                Ping pingSender = new Ping();
+                PingOptions options = new PingOptions();
+                // Use the default Ttl value which is 128,
+                // but change the fragmentation behavior.
+                options.DontFragment = true;
+                // Create a buffer of 32 bytes of data to be transmitted.
+                string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+                byte[] buffer = Encoding.ASCII.GetBytes(data);
+                int timeout = 120;
+
+                PingReply reply = pingSender.Send(hostName, timeout, buffer, options);
+                if (reply.Status == IPStatus.Success)
+                {
+                    retVal = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                retVal = false;
+                MessageBox.Show(ex.Message);
+            }
+            return retVal;
+        }
+
+        public static string Main_Process(string mipaddress, string musername,string mpassword)
+        {
+            string moutput = "";
+            try
+            {
+                // Setup session options
+                SessionOptions sessionOptions = new SessionOptions
+                {
+                    Protocol = Protocol.Scp,
+                    HostName = mipaddress,
+                    UserName = musername,
+                    Password = mpassword,
+                };
+                sessionOptions.AddRawSettings("FSProtocol", "2");
+
+                // Cache key is hostname:portnumber
+                int portNumber =
+                    (sessionOptions.PortNumber != 0) ? sessionOptions.PortNumber : SshPortNumber;
+                string sessionKey = string.Format("{0}:{1}", sessionOptions.HostName, portNumber);
+
+                // Load known hosts (if any)
+                XmlDocument knownHosts = new XmlDocument();
+                if (File.Exists(KnownHostsFile))
+                {
+                    knownHosts.Load(KnownHostsFile);
+                }
+                else
+                {
+                    knownHosts.AppendChild(knownHosts.CreateElement("KnownHosts"));
+                }
+
+                // Lookup host key for this session 
+                XmlNode fingerprintNode =
+                    knownHosts.DocumentElement.SelectSingleNode(
+                        "KnownHost[@host='" + sessionKey + "']/@fingerprint");
+
+                string fingerprint = null;
+                if (fingerprintNode != null)
+                {
+                    fingerprint = fingerprintNode.Value;
+                    Console.WriteLine("Connecting to a known host");
+                }
+                else
+                {
+                    // Host is not known yet. Scan its host key and let the user decide.
+                    using (Session session = new Session())
+                    {
+                        fingerprint = session.ScanFingerprint(sessionOptions, "SHA-256");
+                    }
+
+                    // Cache the host key
+                    XmlElement knownHost = knownHosts.CreateElement("KnownHost");
+                    knownHosts.DocumentElement.AppendChild(knownHost);
+                    knownHost.SetAttribute("host", sessionKey);
+                    knownHost.SetAttribute("fingerprint", fingerprint);
+
+                    knownHosts.Save(KnownHostsFile);
+                }
+
+                // Now we have the fingerprint
+                sessionOptions.SshHostKeyFingerprint = fingerprint;
+
+
+                using (Session session = new Session())
+                {
+                    // Connect
+                    session.Open(sessionOptions);
+
+                    string dumpCommand =
+                    string.Format("wmic computersystem get systemtype");
+                    session.ExecuteCommand(dumpCommand).Check();
+                    moutput = session.ExecuteCommand(dumpCommand).Output;
+                }
+
+                return moutput;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return "";
             }
         }
     }

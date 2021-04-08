@@ -23,18 +23,6 @@ namespace WinSCPFileTransfer
             dgvFiles.Columns[2].Name = "Location";
         }
 
-        private void btnSelectMultiple_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.Multiselect = true;
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                foreach (string file in openFileDialog1.FileNames)
-                {
-                    string[] row1 = new string[] { "true",Path.GetFileName(file), file, file };
-                    dgvFiles.Rows.Add(row1);
-                }
-            }
-        }
 
         private void FormPatchApply_Load(object sender, EventArgs e)
         {
@@ -294,6 +282,25 @@ namespace WinSCPFileTransfer
                     ListPOS.SetItemChecked(i, false);
                 }
             }
+
+        }
+
+        private void btnSelectFiles_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Multiselect = true;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                foreach (string file in openFileDialog1.FileNames)
+                {
+                    string[] row1 = new string[] { "true", Path.GetFileName(file), file, file };
+                    dgvFiles.Rows.Add(row1);
+                }
+            }
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
 
         }
     }

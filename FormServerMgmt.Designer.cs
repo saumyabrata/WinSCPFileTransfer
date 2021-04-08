@@ -29,7 +29,7 @@ namespace WinSCPFileTransfer
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelServer = new System.Windows.Forms.Panel();
             this.comboFilter = new System.Windows.Forms.ComboBox();
             this.textBoxFilter = new System.Windows.Forms.TextBox();
@@ -62,6 +62,7 @@ namespace WinSCPFileTransfer
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvSrv = new System.Windows.Forms.DataGridView();
+            this.checkBit = new System.Windows.Forms.CheckBox();
             this.panelServer.SuspendLayout();
             this.panelButton.SuspendLayout();
             this.panelGrid.SuspendLayout();
@@ -71,6 +72,7 @@ namespace WinSCPFileTransfer
             // panelServer
             // 
             this.panelServer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(25)))), ((int)(((byte)(72)))));
+            this.panelServer.Controls.Add(this.checkBit);
             this.panelServer.Controls.Add(this.comboFilter);
             this.panelServer.Controls.Add(this.textBoxFilter);
             this.panelServer.Controls.Add(this.label5);
@@ -265,6 +267,7 @@ namespace WinSCPFileTransfer
             this.btnCheck.Text = "Check";
             this.btnCheck.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
             // 
             // label6
             // 
@@ -467,14 +470,14 @@ namespace WinSCPFileTransfer
             // 
             // dgvSrv
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.NullValue = null;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSrv.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.NullValue = null;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSrv.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvSrv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -487,6 +490,17 @@ namespace WinSCPFileTransfer
             this.dgvSrv.Size = new System.Drawing.Size(826, 242);
             this.dgvSrv.TabIndex = 80;
             this.dgvSrv.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSrv_CellDoubleClick);
+            // 
+            // checkBit
+            // 
+            this.checkBit.AutoSize = true;
+            this.checkBit.ForeColor = System.Drawing.Color.Gainsboro;
+            this.checkBit.Location = new System.Drawing.Point(755, 232);
+            this.checkBit.Name = "checkBit";
+            this.checkBit.Size = new System.Drawing.Size(91, 22);
+            this.checkBit.TabIndex = 105;
+            this.checkBit.Text = "64 Bit OS";
+            this.checkBit.UseVisualStyleBackColor = true;
             // 
             // FormServerMgmt
             // 
@@ -546,5 +560,6 @@ namespace WinSCPFileTransfer
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox comboFilter;
+        private System.Windows.Forms.CheckBox checkBit;
     }
 }
