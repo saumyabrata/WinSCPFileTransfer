@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -28,7 +29,7 @@ namespace WinSCPFileTransfer
         bool shastatus = false;
         const string KnownHostsFile = "KnownHosts.xml";
         const int SshPortNumber = 22;
-
+        Logger infologger = LogManager.GetLogger("InfoLogger");
 
         public FormServerMgmt()
         {
@@ -80,7 +81,8 @@ namespace WinSCPFileTransfer
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error:- " + ex.Message);
+                    Logger logger = LogManager.GetLogger("fileLogger");
+                    logger.Error(ex, "Error in FetchServerDetails");
                 }
                 finally
                 {
@@ -156,14 +158,23 @@ namespace WinSCPFileTransfer
                                 if (numRes > 0)
                                 {
                                     MessageBox.Show("Record Saved Successfully !!!");
+                                    Logger infologger = LogManager.GetLogger("InfoLogger");
+                                    infologger.Info(textServerName.Text.Trim().ToString() + " Added successfully.");
+
                                     ClearAllData();
                                 }
                                 else
+                                {
                                     MessageBox.Show("Please Try Again !!!");
+                                    Logger infologger = LogManager.GetLogger("InfoLogger");
+                                    infologger.Info(textServerName.Text.Trim().ToString() + " Could not be added.");
+                                }
                             }
                             catch (SqlException ex)
                             {
-                                MessageBox.Show("Error:- " + ex.Message);
+                                Logger logger = LogManager.GetLogger("fileLogger");
+                                logger.Error(ex, "Error in New Server Save");
+
                             }
                             finally
                             {
@@ -202,16 +213,23 @@ namespace WinSCPFileTransfer
                                 if (numRes > 0)
                                 {
                                     MessageBox.Show("Record Updated Successfully !!!");
+                                    Logger infologger = LogManager.GetLogger("InfoLogger");
+                                    infologger.Info(textServerName.Text.Trim().ToString() + " Updated successfully.");
                                     ClearAllData();
+
                                 }
                                 else
+                                {
                                     MessageBox.Show("Please Try Again !!!");
+                                    Logger infologger = LogManager.GetLogger("InfoLogger");
+                                    infologger.Info("Failed to update :"+textServerName.Text.Trim().ToString());
+                                }
 
 
                             }
                             catch (SqlException ex)
-                            {
-                                MessageBox.Show("Error:- " + ex.Message);
+                            {Logger logger = LogManager.GetLogger("fileLogger");
+                                logger.Error(ex, "Error in FetchServerDetails details");
                             }
                             finally
                             {
@@ -306,7 +324,8 @@ namespace WinSCPFileTransfer
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error:- " + ex.Message);
+                    Logger logger = LogManager.GetLogger("fileLogger");
+                    logger.Error(ex, "Error in FetchServerRecords");
                 }
                 finally
                 {
@@ -334,17 +353,22 @@ namespace WinSCPFileTransfer
                         if (numRes > 0)
                         {
                             MessageBox.Show("Record Deleted Successfully !!!");
+                            infologger.Info("Server ID: "+ Convert.ToString(rowid) +" Deleted");
                             ClearAllData();
                         }
                         else
                         {
                             MessageBox.Show("Please Try Again !!!");
+                            infologger.Info("Failed to delete Server ID: " + Convert.ToString(rowid));
+
                         }
 
                     }
                     catch (SqlException ex)
                     {
-                        MessageBox.Show("Error:- " + ex.Message);
+                        Logger logger = LogManager.GetLogger("fileLogger");
+                        logger.Error(ex, "Error in Server Delete ");
+
                     }
                     finally
                     {
@@ -381,7 +405,7 @@ namespace WinSCPFileTransfer
 
         private void textBoxFilter_TextChanged(object sender, EventArgs e)
         {
-            (dgvSrv.DataSource as DataTable).DefaultView.RowFilter =  string.Format("servername LIKE '{0}%' OR servername LIKE '% {0}%'", textBoxFilter.Text);
+            (dgvSrv.DataSource as DataTable).DefaultView.RowFilter =  string.Format("servername LIKE '{0}%' OR servername LIKE '% {0}%' OR store_code LIKE '{0}%' OR store_code LIKE '% {0}%'", textBoxFilter.Text);
         }
 
         private void comboStore_SelectionChangeCommitted(object sender, EventArgs e)
@@ -418,7 +442,9 @@ namespace WinSCPFileTransfer
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error:- " + ex.Message);
+                    Logger logger = LogManager.GetLogger("fileLogger");
+                    logger.Error(ex, "Error in FetchStoreRecords");
+
                 }
                 finally
                 {
@@ -433,10 +459,12 @@ namespace WinSCPFileTransfer
             if (IsMachineUp(textIP.Text.Trim()) == true)
             {
                 checkConnectivity.CheckState = CheckState.Checked;
+                infologger.Info("Connectivity check OK with "+ textIP.Text.Trim());
             }
             else
             {
                 checkConnectivity.CheckState = CheckState.Unchecked;
+                infologger.Info("Connectivity check FAILED with " + textIP.Text.Trim());
             }
 
             if (string.IsNullOrWhiteSpace(textIP.Text))
@@ -498,6 +526,9 @@ namespace WinSCPFileTransfer
             {
                 retVal = false;
                 MessageBox.Show(ex.Message);
+                Logger logger = LogManager.GetLogger("fileLogger");
+                logger.Error(ex, "Error in IsMachineUp with hostname "+ hostName);
+
             }
             return retVal;
         }
@@ -563,7 +594,8 @@ namespace WinSCPFileTransfer
 
                 // Now we have the fingerprint
                 sessionOptions.SshHostKeyFingerprint = fingerprint;
-
+                Logger infologger = LogManager.GetLogger("InfoLogger");
+                infologger.Info("Fingerprint of host "+ mipaddress + " Added successfully.");
 
                 using (Session session = new Session())
                 {
@@ -574,6 +606,7 @@ namespace WinSCPFileTransfer
                     string.Format("wmic computersystem get systemtype");
                     session.ExecuteCommand(dumpCommand).Check();
                     moutput = session.ExecuteCommand(dumpCommand).Output;
+                    infologger.Info("System Type of " + mipaddress +" is " + moutput);
                 }
 
                 return moutput;
@@ -581,7 +614,105 @@ namespace WinSCPFileTransfer
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
+                Logger logger = LogManager.GetLogger("fileLogger");
+                logger.Error(e, "File Sending Error: " + mipaddress);
                 return "";
+            }
+        }
+
+        private void comboStore_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textRegion.Focus();
+            }
+        }
+
+        private void textRegion_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textStoreName.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                comboStore.Focus();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                textStoreName.Focus();
+            }
+        }
+
+        private void textStoreName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                comboCategory.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                textRegion.Focus();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                comboCategory.Focus();
+            }
+        }
+
+        private void comboCategory_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textServerName.Focus();
+            }            
+        }
+
+        private void textServerName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textIP.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                comboCategory.Focus();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                textIP.Focus();
+            }
+        }
+
+        private void textIP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textUser.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                textServerName.Focus();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                textUser.Focus();
+            }
+        }
+
+        private void textUser_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textPassword.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                textIP.Focus();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                textPassword.Focus();
             }
         }
     }

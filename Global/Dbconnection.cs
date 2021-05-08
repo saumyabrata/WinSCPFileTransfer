@@ -7,37 +7,53 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 using System.Windows.Forms;
+using NLog;
 
 namespace WinSCPFileTransfer.Global
 {
     public class Dbconnection
     {
-        public static void CreateCommand(string queryString)
+        public static int CreateCommand(string queryString)
         {
+            int status = 0;
+            SqlTransaction transaction;
             string conn = ConfigurationManager.ConnectionStrings["patchmanagementdb"].ConnectionString;
+
             using (SqlConnection connection = new SqlConnection(conn))
             {
+                connection.Open();
+                Logger infologger = LogManager.GetLogger("InfoLogger");
+                infologger.Debug("Database Connection Established");
+
+                transaction = connection.BeginTransaction();
                 try
                 {
-                    SqlCommand command = new SqlCommand(queryString, connection);
-                    command.Connection.Open();
-                    command.ExecuteNonQuery();
+                    SqlCommand command = new SqlCommand(queryString, connection,transaction);
+                    command.CommandType = CommandType.Text;
+                    status = command.ExecuteNonQuery();
+                    command.Dispose();
+                    transaction.Commit();
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error:- " + ex.Message);
+                    Logger logger = LogManager.GetLogger("fileLogger");
+                    logger.Error(ex, "Error in CreateCommand");
+                    transaction.Rollback();
                 }
                 finally
                 {
                     connection.Close();
                 }
+                return status;
             }
         }
 
         public static DataTable GetDataTable(string queryString)
         {
+
             string conn = ConfigurationManager.ConnectionStrings["patchmanagementdb"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(conn))
+
             {
                 try
                 {
@@ -53,7 +69,10 @@ namespace WinSCPFileTransfer.Global
                 }
                 catch(SqlException ex)
                 {
-                    MessageBox.Show("Error:- " + ex.Message);
+                    //MessageBox.Show("Error:- " + ex.Message);
+                    Logger logger = LogManager.GetLogger("fileLogger");
+                    logger.Error(ex, "Error in GetDataTable");
+
                 }
                 finally
                 {
